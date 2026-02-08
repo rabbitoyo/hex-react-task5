@@ -1,8 +1,8 @@
-## React 作品實戰班 Vite & React - 元件化
+## React 作品實戰班 Vite & React - React Router
 
 此專案為六角學院 React 作品實戰班 Vite & React 作業
 
-- [GitHub Page Demo](https://rabbitoyo.github.io/hex-react-task4/)
+- [GitHub Page Demo](https://rabbitoyo.github.io/hex-react-task5/)
 
 ### 🛠 使用技術
 
@@ -16,7 +16,7 @@
 - 將專案 clone 到本地端
 
 ```bash
-git clone https://github.com/rabbitoyo/hex-react-task4.git
+git clone https://github.com/rabbitoyo/hex-react-task5.git
 ```
 
 - 安裝執行
