@@ -1,15 +1,18 @@
 import axios from 'axios';
 import { getToken } from '../utils';
 
-const BASE_URL = import.meta.env.VITE_API_BASE;
-const API_PATH = import.meta.env.VITE_API_PATH;
+const { VITE_API_BASE, VITE_API_PATH } = import.meta.env;
 
 const authApi = axios.create({
-    baseURL: `${BASE_URL}/`,
+    baseURL: `${VITE_API_BASE}/`,
+});
+
+const frontApi = axios.create({
+    baseURL: `${VITE_API_BASE}/api/${VITE_API_PATH}/`,
 });
 
 const adminApi = axios.create({
-    baseURL: `${BASE_URL}/api/${API_PATH}/admin/`,
+    baseURL: `${VITE_API_BASE}/api/${VITE_API_PATH}/admin/`,
 });
 
 // 設定 interceptor
@@ -34,4 +37,4 @@ export const checkAdminApi = () => authApi.post('api/user/check');
 // 登出 API
 export const logoutApi = () => authApi.post('logout');
 
-export { authApi, adminApi };
+export { authApi, frontApi, adminApi };

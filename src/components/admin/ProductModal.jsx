@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
 // Utils
-import { getErrorMessage, formatNumber } from '../utils';
+import { getErrorMessage, formatNumber } from '../../utils';
 
 // API
-import { addProductApi, updateProductApi, deleteProductApi, uploadImageApi } from '../api/products';
+import { addProductApi, updateProductApi, deleteProductApi, uploadImageApi } from '../../api/admin';
 
 // Modal 相關常數
 const modalConfig = {
@@ -218,7 +218,7 @@ const ProductModal = ({ getProducts, templateProduct, modalRef, modalType, close
             <div className="modal-dialog modal-xl modal-dialog-centered">
                 <div className="modal-content">
                     <div className={`modal-header text-white ${modalConfig[modalType]?.headerClass}`}>
-                        <h5 className="modal-title fw-bold">{modalConfig[modalType]?.title}</h5>
+                        <h5 className="modal-title fs-10 fw-bold">{modalConfig[modalType]?.title}</h5>
                         <button type="button" className="btn-close btn-close-white" onClick={closeModal} />
                     </div>
                     <div className="modal-body">
@@ -252,19 +252,19 @@ const ProductModal = ({ getProducts, templateProduct, modalRef, modalType, close
                                     </div>
                                     <div className="col-xl-7">
                                         <div className="card-body p-4 px-3 pb-2 p-xl-4 h-100 d-flex flex-column">
-                                            <h4 className="card-subtitle badge rounded-pill bg-primary fs-6 fw-normal mt-0 mb-1 align-self-start">
+                                            <h4 className="card-subtitle badge rounded-pill bg-primary fs-11 fw-normal mt-0 mb-1 align-self-start">
                                                 {templateData.category}
                                             </h4>
-                                            <h2 className="card-title fs-1 fw-bold border-bottom pb-3">
+                                            <h2 className="card-title fs-6 fw-bold border-bottom pb-3">
                                                 {templateData.title}
                                             </h2>
                                             <p className="card-text pt-3">{templateData.description}</p>
                                             <p className="card-text pb-5">{templateData.content}</p>
                                             <div className="d-flex justify-content-end mt-auto">
-                                                <p className="card-text fs-3 fw-bold text-primary">
+                                                <p className="card-text fs-8 fw-bold text-primary">
                                                     NT$ {formatNumber(templateData.price)}
-                                                    <span className="text-secondary fs-5 mx-2">/</span>
-                                                    <del className="text-secondary fs-4">
+                                                    <span className="text-secondary fs-10 mx-2">/</span>
+                                                    <del className="text-secondary fs-9">
                                                         {formatNumber(templateData.origin_price)}
                                                     </del>
                                                 </p>
@@ -479,7 +479,7 @@ const ProductModal = ({ getProducts, templateProduct, modalRef, modalType, close
                                                         className="btn btn-danger btn-sm btn-delete-image"
                                                         onClick={() => handleRemoveImage(index)}
                                                     >
-                                                        <span className="material-symbols-outlined fs-6">
+                                                        <span className="material-symbols-outlined fs-11">
                                                             close
                                                         </span>
                                                     </button>

@@ -1,24 +1,20 @@
+import { useNavigate } from 'react-router';
+
 // Components
-import SideBar from '../components/SideBar';
-import Pagination from '../components/Pagination';
+import SideBar from '../../components/admin/SideBar';
+import Pagination from '../../components/common/Pagination';
 
 // Utils
-import { removeToken, getErrorMessage, formatNumber } from '../utils';
+import { removeToken, getErrorMessage, formatNumber } from '../../utils';
 
 // API
-import { logoutApi } from '../api/auth';
-import { updateProductApi } from '../api/products';
+import { logoutApi } from '../../api/auth';
+import { updateProductApi } from '../../api/admin';
 
 // Dashboard 元件
-const Dashboard = ({
-    products,
-    setProducts,
-    getProducts,
-    pagination,
-    setIsLoading,
-    setIsAuth,
-    openModal,
-}) => {
+const Dashboard = ({ products, setProducts, getProducts, pagination, setIsLoading, openModal }) => {
+    const navigate = useNavigate();
+
     // 登出
     const handleLogout = async () => {
         try {
@@ -27,15 +23,16 @@ const Dashboard = ({
             await logoutApi();
 
             alert('已成功登出！');
+
+            navigate('/');
         } catch (error) {
             alert(`API 錯誤：${getErrorMessage(error)}!`);
         } finally {
             // 清除 token
             removeToken();
-
-            setIsAuth(false);
             setProducts([]);
             setIsLoading(false);
+            navigate('/');
         }
     };
 
@@ -83,7 +80,7 @@ const Dashboard = ({
                             openModal('add');
                         }}
                     >
-                        <span className="material-symbols-outlined fs-5">add</span>
+                        <span className="material-symbols-outlined fs-10">add</span>
                         新增商品
                     </button>
                 </div>

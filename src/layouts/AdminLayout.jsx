@@ -1,18 +1,18 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import { Modal } from 'bootstrap';
 
 // Components
-import Loading from './components/common/Loading';
-import Login from './pages/frontend/Login';
-import Dashboard from './pages/admin/Dashboard';
-import ProductModal from './components/admin/ProductModal';
+import Loading from '../components/common/Loading';
+import Dashboard from '../pages/admin/Dashboard';
+import ProductModal from '../components/admin/ProductModal';
 
 // Utils
-import { getToken, getErrorMessage } from './utils';
+import { getToken, getErrorMessage } from '../utils';
 
 // API
-import { checkAdminApi } from './api/auth';
-import { getProductsApi } from './api/products';
+import { checkAdminApi } from '../api/auth';
+import { getProductsApi } from '../api/admin';
 
 // 產品初始資料
 const initialProduct = {
@@ -30,9 +30,10 @@ const initialProduct = {
     imagesUrl: [],
 };
 
-const App = () => {
+const AdminLayout = () => {
+    const navigate = useNavigate();
+
     const [isLoading, setIsLoading] = useState(false);
-    const [isAuth, setIsAuth] = useState(false);
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
     const [products, setProducts] = useState([]);
@@ -67,7 +68,7 @@ const App = () => {
                 const token = getToken();
 
                 if (!token) {
-                    setIsAuth(false);
+                    navigate('/login');
                     return;
                 }
 
@@ -75,17 +76,15 @@ const App = () => {
                 await checkAdminApi();
 
                 await getProducts();
-                setIsAuth(true);
             } catch (error) {
                 alert(`Token 驗證失敗：${getErrorMessage(error)}！`);
-                setIsAuth(false);
             } finally {
                 setIsLoading(false);
                 setIsCheckingAuth(false);
             }
         };
         checkAdmin();
-    }, []);
+    }, [navigate]);
 
     // 建立 Modal 實例
     useEffect(() => {
@@ -123,26 +122,20 @@ const App = () => {
 
     return (
         <>
-            <main>
-                {/* Loading */}
-                <Loading isLoading={isLoading} />
+            {/* Loading */}
+            <Loading isLoading={isLoading} />
 
-                {/* Login or Dashboard */}
-                {!isCheckingAuth &&
-                    (!isAuth ? (
-                        <Login getProducts={getProducts} setIsLoading={setIsLoading} setIsAuth={setIsAuth} />
-                    ) : (
-                        <Dashboard
-                            products={products}
-                            setProducts={setProducts}
-                            getProducts={getProducts}
-                            pagination={pagination}
-                            setIsLoading={setIsLoading}
-                            setIsAuth={setIsAuth}
-                            openModal={openModal}
-                        />
-                    ))}
-            </main>
+            {/* Dashboard */}
+            {!isCheckingAuth && (
+                <Dashboard
+                    products={products}
+                    setProducts={setProducts}
+                    getProducts={getProducts}
+                    pagination={pagination}
+                    setIsLoading={setIsLoading}
+                    openModal={openModal}
+                />
+            )}
 
             {/* Modal */}
             <ProductModal
@@ -155,5 +148,4 @@ const App = () => {
         </>
     );
 };
-
-export default App;
+export default AdminLayout;

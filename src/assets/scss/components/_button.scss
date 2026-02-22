@@ -1,3 +1,27 @@
+.btn {
+    letter-spacing: 0.05em;
+}
+.btn-primary {
+    @include button-variant(
+        $primary,
+        // background
+        $primary,
+        // border
+        $white,
+        // color
+        darken($primary, 10%),
+        // hover-background
+        darken($primary, 10%),
+        // hover-border
+        $white,
+        // hover-color
+        darken($primary, 10%),
+        // active-background
+        darken($primary, 10%),
+        // active-border
+        $white // active-color
+    );
+}
 .btn-outline-primary {
     @include button-outline-variant(
         $primary,
@@ -16,5 +40,19 @@
         background-color: transparent;
         border-color: $secondary;
         opacity: 1;
+    }
+}
+
+.btn-close {
+    font-size: 0;
+    width: auto;
+    height: auto;
+    --bs-btn-close-bg: none;
+    opacity: 0.5;
+
+    &:focus,
+    &:focus-visible {
+        box-shadow: none;
+        outline: none;
     }
 }

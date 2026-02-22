@@ -1,0 +1,34 @@
+// font 自動生成所有 breakpoint font-size utilities
+@each $breakpoint, $breakpoint-value in $grid-breakpoints {
+    @include media-breakpoint-up($breakpoint) {
+        @each $size, $font-size in $font-sizes {
+            .fs-#{$breakpoint}-#{$size} {
+                font-size: $font-size !important;
+            }
+        }
+    }
+}
+
+.font-montserrat {
+    font-family: $font-family-montserrat;
+}
+
+// text
+.text-small {
+    letter-spacing: 0.5rem;
+}
+
+.text-description {
+    border-left: 1px solid rgba($black, 0.25);
+    max-width: 350px;
+    color: rgba($black, 0.7);
+
+    @include media-breakpoint-down(lg) {
+        border: none;
+    }
+}
+
+// link
+.link-primary {
+    transition: 0.15s ease-in-out;
+}

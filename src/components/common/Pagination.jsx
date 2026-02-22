@@ -14,7 +14,7 @@ const Pagination = ({ pagination, onChangePage }) => {
                         aria-label="Previous"
                         onClick={(e) => handleClick(e, pagination.current_page - 1)}
                     >
-                        <span className="material-symbols-outlined fs-6" aria-hidden="true">
+                        <span className="material-symbols-outlined fs-11" aria-hidden="true">
                             keyboard_arrow_left
                         </span>
                     </a>
@@ -36,7 +36,7 @@ const Pagination = ({ pagination, onChangePage }) => {
                         aria-label="Next"
                         onClick={(e) => handleClick(e, pagination.current_page + 1)}
                     >
-                        <span className="material-symbols-outlined fs-6" aria-hidden="true">
+                        <span className="material-symbols-outlined fs-11" aria-hidden="true">
                             keyboard_arrow_right
                         </span>
                     </a>

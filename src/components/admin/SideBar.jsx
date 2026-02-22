@@ -1,8 +1,8 @@
 // SideBar 元件
 const SideBar = () => {
     return (
-        <div className="sidebar bg-primary d-flex flex-column p-4">
-            <h4 className="fw-semibold mb-2 d-flex justify-content-center align-items-center text-white mb-5">
+        <div className="sidebar d-flex flex-column p-6">
+            <h4 className="fs-9 fw-semibold mb-2 d-flex justify-content-center align-items-center text-white mb-10 font-montserrat">
                 <span className="material-symbols-outlined bg-white text-primary rounded-2 p-1 me-2">
                     travel
                 </span>
