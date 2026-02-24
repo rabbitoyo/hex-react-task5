@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import DOMPurify from 'dompurify';
 
 // Utils
 import { getErrorMessage, formatNumber } from '../../utils';
@@ -46,7 +47,16 @@ const SingleProduct = () => {
                                 <div className="d-flex flex-column gap-15">
                                     <div className="d-block">
                                         <h3 className="fs-8 fw-bold border-bottom pb-2 mb-4">行程簡介</h3>
-                                        <p className="text-muted">{product.description}</p>
+                                        <p className="text-dark">{product.description}</p>
+                                    </div>
+                                    <div className="d-block">
+                                        <h3 className="fs-8 fw-bold border-bottom pb-2 mb-4">行程內容</h3>
+                                        <div
+                                            className="text-dark" // 這裡加上 DOMPurify.sanitize()
+                                            dangerouslySetInnerHTML={{
+                                                __html: DOMPurify.sanitize(product.content),
+                                            }}
+                                        ></div>
                                     </div>
                                     <div className="d-block">
                                         <h3 className="fs-8 fw-bold border-bottom pb-2 mb-4">行程景點</h3>

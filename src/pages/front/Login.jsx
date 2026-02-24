@@ -75,7 +75,7 @@ const Login = () => {
                                     </label>
                                     <input
                                         type="email"
-                                        className="form-control bg-white border rounded-sm"
+                                        className="form-control bg-white rounded-sm"
                                         name="username"
                                         value={account.username}
                                         onChange={handleInputChange}
@@ -95,7 +95,7 @@ const Login = () => {
                                     </label>
                                     <input
                                         type="password"
-                                        className="form-control bg-white border rounded-sm"
+                                        className="form-control bg-white rounded-sm"
                                         name="password"
                                         value={account.password}
                                         onChange={handleInputChange}

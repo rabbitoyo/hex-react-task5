@@ -108,7 +108,7 @@ const Dashboard = ({ products, setProducts, getProducts, pagination, setIsLoadin
                                             <td>
                                                 <img
                                                     className="img-thumbnail"
-                                                    src={product.imageUrl}
+                                                    src={`${product.imageUrl}?q=80&w=300&auto=format&fit=crop`}
                                                     alt={product.title}
                                                 />
                                             </td>

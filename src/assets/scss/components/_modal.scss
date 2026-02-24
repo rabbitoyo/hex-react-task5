@@ -65,6 +65,10 @@
         border-radius: 50%;
         z-index: 20;
     }
+
+    li {
+        margin-bottom: 0.5rem;
+    }
 }
 
 @media (max-width: 992px) {

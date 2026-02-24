@@ -28,8 +28,15 @@
         }
     }
 
+    .text-dark {
+        li {
+            margin-bottom: 0.5rem;
+        }
+    }
+
     .detail-img {
         max-width: 300px;
+        width: 100%;
         max-height: 200px;
         overflow: hidden;
 

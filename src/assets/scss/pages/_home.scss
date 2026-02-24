@@ -1,6 +1,7 @@
 .popularProducts {
     position: relative;
     background: $white;
+    overflow: hidden;
 
     &::before {
         content: '';
@@ -20,6 +21,14 @@
 
     .container {
         position: relative;
+    }
+
+    .products {
+        background: none;
+
+        &::before {
+            display: none;
+        }
     }
 
     .card {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import DOMPurify from 'dompurify';
 
 // Utils
 import { getErrorMessage, formatNumber } from '../../utils';
@@ -133,10 +134,14 @@ const ProductModal = ({ getProducts, templateProduct, modalRef, modalType, close
 
     // 新增/更新產品
     const updateProduct = async () => {
+        // 送出的資料前先消毒
+        const sanitizedContent = DOMPurify.sanitize(templateData.content);
+
         // 送出的資料
         const productData = {
             data: {
                 ...templateData,
+                content: sanitizedContent, // 使用消毒後的乾淨代碼
                 origin_price: Number(templateData.origin_price), // 轉換為數字
                 price: Number(templateData.price), // 轉換為數字
                 ticket_quantity: Number(templateData.ticket_quantity), // 轉換為數字
@@ -224,12 +229,12 @@ const ProductModal = ({ getProducts, templateProduct, modalRef, modalType, close
                     <div className="modal-body">
                         {isPreview ? (
                             <div className="card rounded p-2 overflow-hidden">
-                                <div className="row g-0">
+                                <div className="row align-items-center g-0">
                                     <div className="col-xl-5">
                                         <div className="p-2 p-xl-0">
                                             {templateData.imageUrl && (
                                                 <img
-                                                    src={templateData.imageUrl}
+                                                    src={`${templateData.imageUrl}?q=80&w=800&auto=format&fit=crop`}
                                                     className="img-thumbnail mb-2"
                                                     alt={templateData.title}
                                                 />
@@ -240,7 +245,7 @@ const ProductModal = ({ getProducts, templateProduct, modalRef, modalType, close
                                                         templateData.imagesUrl.map((url, index) => (
                                                             <div className="col-4" key={index}>
                                                                 <img
-                                                                    src={url}
+                                                                    src={`${url}?q=80&w=200&auto=format&fit=crop`}
                                                                     className="img-thumbnail"
                                                                     alt={`${templateData.title} ${index + 1}`}
                                                                 />
@@ -259,7 +264,13 @@ const ProductModal = ({ getProducts, templateProduct, modalRef, modalType, close
                                                 {templateData.title}
                                             </h2>
                                             <p className="card-text pt-3">{templateData.description}</p>
-                                            <p className="card-text pb-5">{templateData.content}</p>
+                                            <div
+                                                className="card-text py-5"
+                                                // 這裡加上 DOMPurify.sanitize()
+                                                dangerouslySetInnerHTML={{
+                                                    __html: DOMPurify.sanitize(templateData.content),
+                                                }}
+                                            ></div>
                                             <div className="d-flex justify-content-end mt-auto">
                                                 <p className="card-text fs-8 fw-bold text-primary">
                                                     NT$ {formatNumber(templateData.price)}
@@ -470,7 +481,7 @@ const ProductModal = ({ getProducts, templateProduct, modalRef, modalType, close
                                                     className={`image-preview-thumbnail-container ${index === 0 && 'main-image'}`}
                                                 >
                                                     <img
-                                                        src={url}
+                                                        src={`${url}?q=80&w=200&auto=format&fit=crop`}
                                                         className="image-preview-thumbnail"
                                                         alt={`Uploaded ${index}`}
                                                     />
