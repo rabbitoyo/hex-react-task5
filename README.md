@@ -6,9 +6,9 @@
 
 ### 🛠 使用技術
 
+- Vite
 - Bootstrap 5
 - SCSS
-- Vite
 - React
 
 ### 💻 安裝執行

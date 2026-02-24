@@ -126,7 +126,9 @@ const Products = () => {
                         </div>
                     </div>
 
-                    {totalPages > 1 && <Pagination pagination={pagination} onChangePage={setCurrentPage} />}
+                    {!isLoading && totalPages > 1 && (
+                        <Pagination pagination={pagination} onChangePage={setCurrentPage} />
+                    )}
                 </div>
             </section>
         </>

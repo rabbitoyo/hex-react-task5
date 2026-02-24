@@ -6,7 +6,7 @@ const Pagination = ({ pagination, onChangePage }) => {
 
     return (
         <nav aria-label="Page navigation">
-            <ul className="pagination justify-content-center mt-3">
+            <ul className="pagination justify-content-center gap-2 mt-3">
                 <li className={`page-item ${!pagination.has_pre ? 'disabled' : ''}`}>
                     <a
                         className="page-link"
@@ -14,7 +14,7 @@ const Pagination = ({ pagination, onChangePage }) => {
                         aria-label="Previous"
                         onClick={(e) => handleClick(e, pagination.current_page - 1)}
                     >
-                        <span className="material-symbols-outlined fs-11" aria-hidden="true">
+                        <span className="material-symbols-outlined fs-9" aria-hidden="true">
                             keyboard_arrow_left
                         </span>
                     </a>
@@ -36,7 +36,7 @@ const Pagination = ({ pagination, onChangePage }) => {
                         aria-label="Next"
                         onClick={(e) => handleClick(e, pagination.current_page + 1)}
                     >
-                        <span className="material-symbols-outlined fs-11" aria-hidden="true">
+                        <span className="material-symbols-outlined fs-9" aria-hidden="true">
                             keyboard_arrow_right
                         </span>
                     </a>
