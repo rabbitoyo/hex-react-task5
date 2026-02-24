@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
         <Link to={`/product/${product.id}`} className="card rounded-4 shadow-sm overflow-hidden">
             {/* Image */}
             <div className="card-img-top">
-                <img src={`${product.imageUrl}?q=80&w=800&auto=format&fit=crop`} />
+                <img src={`${product.imageUrl}?q=80&w=800&auto=format&fit=crop`} alt={product.title} />
             </div>
 
             {/* Perforated Divider */}

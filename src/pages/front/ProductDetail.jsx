@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, Link } from 'react-router';
 import DOMPurify from 'dompurify';
 
 // Utils
@@ -10,6 +10,7 @@ import { getProductDetailApi } from '../../api/front';
 
 const SingleProduct = () => {
     const [product, setProduct] = useState({});
+
     const { id } = useParams();
 
     useEffect(() => {
@@ -35,22 +36,26 @@ const SingleProduct = () => {
                                 <span className="text-white-50 text-small fw-bold small mb-3">
                                     {product.category}
                                 </span>
-                                <h2 className="fs-6 fw-bold text-white">{product.title}</h2>
+                                <h2 className="fs-7 fs-lg-6 fw-bold text-white">{product.title}</h2>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="py-10 py-sm-15">
                     <div className="container">
-                        <div className="row g-15">
-                            <div className="col-8">
-                                <div className="d-flex flex-column gap-15">
+                        <div className="row row-gap-6">
+                            <div className="col-xl-8">
+                                <div className="d-flex flex-column gap-8 gap-lg-15">
                                     <div className="d-block">
-                                        <h3 className="fs-8 fw-bold border-bottom pb-2 mb-4">行程簡介</h3>
+                                        <h3 className="fs-9 fs-lg-8 fw-bold border-bottom pb-2 mb-4">
+                                            行程簡介
+                                        </h3>
                                         <p className="text-dark">{product.description}</p>
                                     </div>
                                     <div className="d-block">
-                                        <h3 className="fs-8 fw-bold border-bottom pb-2 mb-4">行程內容</h3>
+                                        <h3 className="fs-9 fs-lg-8 fw-bold border-bottom pb-2 mb-4">
+                                            行程內容
+                                        </h3>
                                         <div
                                             className="text-dark" // 這裡加上 DOMPurify.sanitize()
                                             dangerouslySetInnerHTML={{
@@ -59,8 +64,10 @@ const SingleProduct = () => {
                                         ></div>
                                     </div>
                                     <div className="d-block">
-                                        <h3 className="fs-8 fw-bold border-bottom pb-2 mb-4">行程景點</h3>
-                                        <div className="d-flex gap-4">
+                                        <h3 className="fs-9 fs-lg-8 fw-bold border-bottom pb-2 mb-4">
+                                            行程景點
+                                        </h3>
+                                        <div className="d-flex flex-column flex-md-row gap-2 gap-lg-4">
                                             {product.imagesUrl &&
                                                 product.imagesUrl.map((url, index) => (
                                                     <div className="detail-img img-thumbnail" key={index}>
@@ -73,8 +80,10 @@ const SingleProduct = () => {
                                         </div>
                                     </div>
                                     <div className="d-block">
-                                        <h3 className="fs-8 fw-bold border-bottom pb-2 mb-4">費用包含</h3>
-                                        <ul className="list-unstyled d-flex flex-column gap-4">
+                                        <h3 className="fs-9 fs-lg-8 fw-bold border-bottom pb-2 mb-4">
+                                            費用包含
+                                        </h3>
+                                        <ul className="list-unstyled d-flex flex-column gap-2 gap-lg-4">
                                             <li className="d-flex align-items-center">
                                                 <i className="material-symbols-outlined me-2 text-success">
                                                     check
@@ -103,23 +112,28 @@ const SingleProduct = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-4">
-                                <div className="sticky-top bg-white w-100 rounded-4 shadow p-8">
-                                    <span className="font-montserrat del">
-                                        原價 $ {formatNumber(product.origin_price)}
+                            <div className="col-xl-4">
+                                <div className="productPrice bg-white w-100 rounded-4 border text-end p-5 p-lg-8 mb-5">
+                                    <span className="font-montserrat text-muted">
+                                        原價 $ <del>{formatNumber(product.origin_price)}</del>
                                     </span>
-                                    <p className="fs-6 fw-bold font-montserrat mb-5">
+                                    <p className="fs-7 fs-lg-6 fw-bold font-montserrat mb-3 mb-lg-5">
                                         $ {formatNumber(product.price)}{' '}
                                         <span className="text-muted fs-11 fw-semibold">
                                             / 每{product.unit}
                                         </span>
                                     </p>
-                                    <button
-                                        type="button"
-                                        className="btn btn-primary w-100 py-4 fs-10 fw-bold"
-                                    >
-                                        立即預訂
-                                    </button>
+                                    <div className="d-flex flex-column gap-2">
+                                        <Link to="/cart" className="btn btn-primary w-100 py-4 fs-10 fw-bold">
+                                            立即預訂
+                                        </Link>
+                                        <Link
+                                            to="/product"
+                                            className="btn btn-light w-100 py-4 fs-10 fw-bold"
+                                        >
+                                            返回列表
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>

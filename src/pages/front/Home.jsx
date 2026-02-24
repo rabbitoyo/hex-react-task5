@@ -132,7 +132,7 @@ const Home = () => {
 
             <section className="exploreProduct py-10 py-sm-15">
                 <div className="container">
-                    <div className="d-flex flex-column align-items-center mb-4">
+                    <div className="d-flex flex-column align-items-center">
                         <span className="text-primary text-small fw-bold small mb-3">旅程探索</span>
                         <h3 className="fs-6 fs-lg-4 fw-bold text-dark mb-4">前往世界旅圖</h3>
                         <p className="text-muted ps-lg-4 py-1 text-center text-lg-start">

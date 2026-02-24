@@ -107,7 +107,7 @@ const Products = () => {
                     <div className="d-flex flex-column flex-lg-row justify-content-between align-items-center align-items-lg-end pt-12 pt-sm-17 mb-6 mb-sm-12">
                         <div className="d-flex flex-column align-items-center align-items-lg-start mb-4 mb-lg-0">
                             <span className="text-primary text-small fw-bold small mb-3">推薦系列</span>
-                            <h3 className="fs-6 fs-lg-4 fw-bold text-dark">精選旅程套票</h3>
+                            <h2 className="fs-6 fs-lg-4 fw-bold text-dark">精選旅程套票</h2>
                         </div>
                         <p className="text-description ps-lg-4 py-1 text-center text-lg-start">
                             專為重視品質與體驗的旅者打造，展開從容而難忘的遠行。

@@ -1,16 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router';
 
 const NotFound = () => {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        setTimeout(() => {
-            navigate('/', {
-                replace: true, // 不會再回到 404 這頁，回上一頁也會失效
-            });
-        }, 2000);
+    const handleReturn = useCallback(() => {
+        navigate('/', { replace: true });
     }, [navigate]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            handleReturn();
+        }, 3000);
+
+        // 組件卸載時清除計時器
+        return () => clearTimeout(timer);
+    }, [handleReturn]);
 
     return (
         <>
@@ -30,8 +35,8 @@ const NotFound = () => {
 
                     <button
                         type="button"
-                        className="btn btn-primary px-10 rounded-pill fs-11 fs-md-10 fw-bold"
-                        onClick={() => navigate('/')}
+                        className="btn btn-primary px-10 fs-11 fs-md-10 fw-bold"
+                        onClick={handleReturn}
                     >
                         返回首頁
                     </button>
