@@ -60,7 +60,7 @@ const Cart = () => {
                                                     </span>
                                                 </div>
 
-                                                <div className="cart-edit d-flex justify-content-between align-items-center gap-4">
+                                                <div className="cart-edit d-flex justify-content-between align-items-center gap-4 w-100">
                                                     <div className="d-flex justify-content-between align-items-center rounded-4 gap-2">
                                                         <button
                                                             type="button"
