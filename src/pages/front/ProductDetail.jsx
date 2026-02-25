@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router';
 import DOMPurify from 'dompurify';
+import { useCart } from '../../context/useCart';
 
 // Utils
 import { getErrorMessage, formatNumber } from '../../utils';
@@ -8,15 +9,17 @@ import { getErrorMessage, formatNumber } from '../../utils';
 // API
 import { getProductDetailApi } from '../../api/front';
 
-const SingleProduct = () => {
+const ProductDetail = () => {
     const [product, setProduct] = useState({});
-
+    const [qty, setQty] = useState(1);
     const { id } = useParams();
+    const navigate = useNavigate();
+    const { addToCart } = useCart();
 
     useEffect(() => {
-        const getProductDetail = async (id) => {
+        const getProductDetail = async (productId) => {
             try {
-                const res = await getProductDetailApi(id);
+                const res = await getProductDetailApi(productId);
                 setProduct(res.data.product);
             } catch (error) {
                 alert(`API 錯誤：${getErrorMessage(error)}!`);
@@ -24,6 +27,25 @@ const SingleProduct = () => {
         };
         getProductDetail(id);
     }, [id]);
+
+    // 加入購物車
+    const handleAddToCart = async (productId, quantity) => {
+        const res = await addToCart(productId, quantity);
+        if (res?.data?.success) {
+            alert(`${res?.data?.message}！`);
+            navigate('/cart');
+        }
+    };
+
+    // 減少數量
+    const handleDecreaseQty = () => {
+        setQty((prevQty) => Math.max(1, prevQty - 1));
+    };
+
+    // 增加數量
+    const handleIncreaseQty = () => {
+        setQty((prevQty) => prevQty + 1);
+    };
 
     return (
         <>
@@ -43,7 +65,7 @@ const SingleProduct = () => {
                 </div>
                 <div className="py-10 py-sm-15">
                     <div className="container">
-                        <div className="row row-gap-6">
+                        <div className="row flex-xl-nowrap row-gap-6 g-xl-15">
                             <div className="col-xl-8">
                                 <div className="d-flex flex-column gap-8 gap-lg-15">
                                     <div className="d-block">
@@ -117,22 +139,49 @@ const SingleProduct = () => {
                                     <span className="font-montserrat text-muted">
                                         原價 $ <del>{formatNumber(product.origin_price)}</del>
                                     </span>
-                                    <p className="fs-7 fs-lg-6 fw-bold font-montserrat mb-3 mb-lg-5">
+                                    <p className="fs-7 fs-lg-6 fw-bold font-montserrat mb-4">
                                         $ {formatNumber(product.price)}{' '}
                                         <span className="text-muted fs-11 fw-semibold">
                                             / 每{product.unit}
                                         </span>
                                     </p>
+                                    <div className="d-flex justify-content-center border-top pt-4 mb-4">
+                                        <div className="d-flex justify-content-between align-items-center rounded-4 gap-2 w-100">
+                                            <button
+                                                type="button"
+                                                className="btn btn-outline-primary rounded-pill p-2"
+                                                disabled={qty === 1}
+                                                onClick={handleDecreaseQty}
+                                            >
+                                                <i className="material-symbols-outlined fs-10">remove</i>
+                                            </button>
+                                            <span className="fs-7 fs-lg-6 fw-bold font-montserrat">
+                                                {qty}
+                                            </span>
+                                            <button
+                                                type="button"
+                                                className="btn btn-outline-primary rounded-pill p-2"
+                                                onClick={handleIncreaseQty}
+                                            >
+                                                <i className="material-symbols-outlined fs-10">add</i>
+                                            </button>
+                                        </div>
+                                    </div>
                                     <div className="d-flex flex-column gap-2">
-                                        <Link to="/cart" className="btn btn-primary w-100 py-4 fs-10 fw-bold">
+                                        <button
+                                            type="button"
+                                            className="btn btn-primary w-100 py-4 fs-10 fw-bold"
+                                            onClick={() => handleAddToCart(product.id, qty)}
+                                        >
                                             立即預訂
-                                        </Link>
-                                        <Link
-                                            to="/product"
+                                        </button>
+                                        <button
+                                            type="button"
                                             className="btn btn-light w-100 py-4 fs-10 fw-bold"
+                                            onClick={() => navigate('/product')}
                                         >
                                             返回列表
-                                        </Link>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -143,4 +192,4 @@ const SingleProduct = () => {
         </>
     );
 };
-export default SingleProduct;
+export default ProductDetail;

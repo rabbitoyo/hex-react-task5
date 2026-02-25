@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link, NavLink } from 'react-router';
 import Offcanvas from 'bootstrap/js/dist/offcanvas';
+import { useCart } from '../../context/useCart';
 
 import logo from '../../assets/images/logo.svg';
 
@@ -17,6 +18,7 @@ const NavBar = () => {
     const [show, setShow] = useState(false);
     const offcanvasRef = useRef(null);
     const instanceRef = useRef(null);
+    const { cart } = useCart();
 
     const handleClose = useCallback(() => {
         setShow(false);
@@ -108,8 +110,13 @@ const NavBar = () => {
 
                         <div className="d-flex alingn-items-center gap-2 ms-auto ms-lg-0">
                             {/* Cart */}
-                            <Link to="/cart" className="link-primary">
+                            <Link to="/cart" className="link-primary position-relative">
                                 <i className="material-symbols-outlined">local_mall</i>
+                                {cart.carts.length > 0 && (
+                                    <span className="position-absolute top-0 end-0 badge rounded-pill bg-danger">
+                                        {cart.carts.length}
+                                    </span>
+                                )}
                             </Link>
 
                             {/* Login */}

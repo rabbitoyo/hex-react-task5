@@ -28,7 +28,7 @@ const Login = () => {
             const { token, expired } = res.data;
             setToken(token, expired);
 
-            alert(`${getErrorMessage(res.data)}!`);
+            alert(`${res?.data?.message}!`);
             navigate('/admin');
         } catch (error) {
             alert(`${getErrorMessage(error)}!`);

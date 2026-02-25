@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation, Outlet } from 'react-router';
 import NavBar from '../components/common/NavBar';
 import Footer from '../components/layout/Footer';
+import { CartProvider } from '../context/CartProvider';
 
 const FrontLayout = () => {
     const location = useLocation();
@@ -15,11 +16,13 @@ const FrontLayout = () => {
 
     return (
         <>
-            <NavBar />
-            <main>
-                <Outlet />
-            </main>
-            <Footer />
+            <CartProvider>
+                <NavBar />
+                <main>
+                    <Outlet />
+                </main>
+                <Footer />
+            </CartProvider>
         </>
     );
 };
